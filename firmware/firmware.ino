@@ -68,9 +68,11 @@ void setup() {
 
   //calibrate temperature sensor
   while(!ccs.available());
-  float tempData = temp.read();//ccs.calculateTemperature();
+  //float tempData = temp.read();
+  /*
+  ccs.calculateTemperature();
   ccs.setTempOffset(tempData - 25.0);
-
+  */
   // text display tests
   display.setTextSize(1);
   display.setTextColor(WHITE);
