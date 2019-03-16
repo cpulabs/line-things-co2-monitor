@@ -5,6 +5,7 @@
 #include <bluefruit.h>
 #include <Adafruit_SSD1306.h>
 #include "Adafruit_CCS811.h"
+#include <linethings_temp.h>
 
 // Device Name: Maximum 30 bytes
 #define DEVICE_NAME "LINE Things CO2 Monitor"
@@ -22,6 +23,7 @@
 
 Adafruit_CCS811 ccs;
 Adafruit_SSD1306 display = Adafruit_SSD1306();
+ThingsTemp temp = ThingsTemp();
 
 uint8_t userServiceUUID[16];
 uint8_t airServiceUUID[16];
@@ -48,16 +50,16 @@ void setup() {
 
   setupServices();
   startAdvertising();
-  Serial.println("Ready to Connect");
 
   if(!ccs.begin()){
     Serial.println("Failed to start sensor! Please check your wiring.");
     while(1);
   }
 
+  temp.init();
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x32)
-
   display.display();
+
   delay(500);
 
   // Clear the buffer.
@@ -66,10 +68,8 @@ void setup() {
 
   //calibrate temperature sensor
   while(!ccs.available());
-  float temp = ccs.calculateTemperature();
-  ccs.setTempOffset(temp - 25.0);
-
-  Serial.println("IO test");
+  float tempData = temp.read();//ccs.calculateTemperature();
+  ccs.setTempOffset(tempData - 25.0);
 
   // text display tests
   display.setTextSize(1);
@@ -77,7 +77,6 @@ void setup() {
 
   timer.begin(200, triggerRefreshSensorValue);
   timer.start();
-
 }
 
 
@@ -90,7 +89,8 @@ void loop() {
   if (refreshSensorValue) {
     if(ccs.available()){
       display.clearDisplay();
-      float temp = ccs.calculateTemperature();
+      float tempData = temp.read();//ccs.calculateTemperature();
+
       display.setCursor(0,0);
       if(!ccs.readData()){
         display.print("eCO2: ");
@@ -102,11 +102,11 @@ void loop() {
         display.print(tvco);
 
         display.print(" ppb\nTemp: ");
-        display.println(temp);
+        display.println(tempData);
         display.display();
 
         int16_t tx_frame[3] = {
-          (int16_t) temp * 100,
+          (int16_t) tempData * 100,
           (int16_t) eCO2,
           (int16_t) tvco
         };
