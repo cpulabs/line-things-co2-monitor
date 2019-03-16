@@ -106,9 +106,9 @@ void loop() {
         display.display();
 
         int16_t tx_frame[3] = {
+          (int16_t) temp * 100,
           (int16_t) eCO2,
-          (int16_t) tvco,
-          (int16_t) temp * 100
+          (int16_t) tvco
         };
 
         //co2Characteristic.notify16((uint16_t) eCO2);
