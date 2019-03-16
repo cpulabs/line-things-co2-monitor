@@ -140,70 +140,11 @@ function initializeCardForDevice(device) {
     template.setAttribute('id', cardId);
     template.querySelector('.card > .card-header > .device-name').innerText = device.name;
 
-    //LED Control
-    template.querySelector('.led0_value').addEventListener('change', () => {
-        onScreenLog('LED0 Value changed');
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-
-        const led0_status = template.querySelector('.led0_value').checked;
-        onScreenLog('LED0 status : ' + led0_status);
-
-    });
-    template.querySelector('.led1_value').addEventListener('change', () => {
-        onScreenLog('LED1 Value changed');
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.led2_value').addEventListener('change', () => {
-        onScreenLog('LED2 Value changed');
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.led3_value').addEventListener('change', () => {
-        onScreenLog('LED3 Value changed');
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.buzzer_value').addEventListener('change', () => {
-        onScreenLog('Buzzer Value changed');
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io2_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io3_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io4_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io5_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io12_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io13_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io14_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io15_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-    template.querySelector('.io16_value').addEventListener('change', () => {
-        updateLedState(device).catch(e => onScreenLog(`ERROR on updateLedState(): ${e}\n${e.stack}`));
-    });
-
     // Device disconnect button
     template.querySelector('.device-disconnect').addEventListener('click', () => {
         onScreenLog('Clicked disconnect button');
         device.gatt.disconnect();
     });
-
-    template.querySelector('.setuuid').addEventListener('click', () => {
-
-        writeAdvertuuid(device, template.querySelector('.uuid_text').value).catch(e => onScreenLog(`ERROR on writeAdvertuuid(): ${e}\n${e.stack}`));
-    });
-
 
     template.querySelector('.notification-enable').addEventListener('click', () => {
         toggleNotification(device).catch(e => onScreenLog(`ERROR on toggleNotification(): ${e}\n${e.stack}`));
@@ -330,21 +271,12 @@ async function refreshValues(device) {
 
 function updateSensorValue(device, buffer) {
     const temperature = buffer.getInt16(0, true) / 100.0;
-    const accelX = buffer.getInt16(2, true) / 1000.0;
-    const accelY = buffer.getInt16(4, true) / 1000.0;
-    const accelZ = buffer.getInt16(6, true) / 1000.0;
-    const sw1 = buffer.getInt16(8, true);
-    const sw2 = buffer.getInt16(10, true);
+    const co2 = buffer.getInt16(2, true);
+    const tvco = buffer.getInt16(4, true);
 
-    getDeviceProgressBarX(device).style.width = (accelX / 4 * 100 + 50) + "%";
-    getDeviceProgressBarY(device).style.width = (accelY / 4 * 100 + 50) + "%";
-    getDeviceProgressBarZ(device).style.width = (accelZ / 4 * 100 + 50) + "%";
     getDeviceProgressBarTemperature(device).innerText = temperature + "℃";
-    getDeviceProgressBarX(device).innerText = accelX;
-    getDeviceProgressBarY(device).innerText = accelY;
-    getDeviceProgressBarZ(device).innerText = accelZ;
-    getDeviceStatusSw1(device).innerText = (sw1 == 0x0001)? "ON" : "OFF";
-    getDeviceStatusSw2(device).innerText = (sw2 == 0x0001)? "ON" : "OFF";
+    getDeviceStatusCo2(device).innerText = co2 + "ppm";
+    getDeviceStatusTvco(device).innerText = tvco + "ppb" ;
 }
 
 async function readCharacteristic(characteristic) {
@@ -361,73 +293,6 @@ async function readCharacteristic(characteristic) {
     }
 }
 
-async function updateLedState(device) {
-    const card = getDeviceCard(device);
-    const led0_status = !!card.querySelector('.led0_value').checked;
-    const led1_status = !!card.querySelector('.led1_value').checked;
-    const led2_status = !!card.querySelector('.led2_value').checked;
-    const led3_status = !!card.querySelector('.led3_value').checked;
-    const buzzer_status = !!card.querySelector('.buzzer_value').checked;
-    const io2_status = !!card.querySelector('.io2_value').checked;
-    const io3_status = !!card.querySelector('.io3_value').checked;
-    const io4_status = !!card.querySelector('.io4_value').checked;
-    const io5_status = !!card.querySelector('.io5_value').checked;
-    const io12_status = !!card.querySelector('.io12_value').checked;
-    const io13_status = !!card.querySelector('.io13_value').checked;
-    const io14_status = !!card.querySelector('.io14_value').checked;
-    const io15_status = !!card.querySelector('.io15_value').checked;
-    const io16_status = !!card.querySelector('.io16_value').checked;
-
-    let data = [0, 0];
-    data[1] = data[1] + (led0_status << 7);
-    data[1] = data[1] + (led1_status << 6);
-    data[1] = data[1] + (led2_status << 5);
-    data[1] = data[1] + (led3_status << 4);
-    data[1] = data[1] + (buzzer_status << 3);
-    data[1] = data[1] + (io2_status << 2);
-    data[1] = data[1] + (io3_status << 1);
-    data[1] = data[1] + io4_status;
-    data[0] = data[0] + (io5_status << 7);
-    data[0] = data[0] + (io12_status << 6);
-    data[0] = data[0] + (io13_status << 5);
-    data[0] = data[0] + (io14_status << 4);
-    data[0] = data[0] + (io15_status << 3);
-    data[0] = data[0] + (io16_status << 2);
-
-    const header = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    const command = header.concat(data);
-
-    onScreenLog('Write to device : ' + new Uint8Array(command));
-
-    const characteristic = await getCharacteristic(
-          device, USER_SERVICE_UUID, USER_CHARACTERISTIC_WRITE_UUID);
-    await characteristic.writeValue(new Uint8Array(command)).catch(e => {
-        onScreenLog(`Error writing ${characteristic.uuid}: ${e}`);
-        throw e;
-    });
-}
-
-async function writeAdvertuuid(device, uuid) {
-  const tx_uuid = uuid.replace(/-/g, '');
-  let uuid_byte = [];
-  let hash = 0;
-  for(let i = 0; i < 16; i = i + 1) {
-    uuid_byte[i] = parseInt(tx_uuid.substring(i * 2, i * 2 + 2), 16);
-    hash = hash + uuid_byte[i];
-  }
-
-  const header = [1, 0, 0, hash];
-  const command = header.concat(uuid_byte);
-
-  onScreenLog('Write new advert UUID to device  : ' + new Uint8Array(command));
-
-  const characteristic = await getCharacteristic(
-        device, USER_SERVICE_UUID, USER_CHARACTERISTIC_WRITE_UUID);
-  await characteristic.writeValue(new Uint8Array(command)).catch(e => {
-      onScreenLog(`Error writing ${characteristic.uuid}: ${e}`);
-      throw e;
-  });
-}
 
 
 async function getCharacteristic(device, serviceId, characteristicId) {
@@ -475,11 +340,11 @@ function getDeviceProgressBarZ(device) {
     return getDeviceCard(device).getElementsByClassName('progress-bar-z')[0];
 }
 
-function getDeviceStatusSw1(device) {
-    return getDeviceCard(device).getElementsByClassName('sw1-value')[0];
+function getDeviceStatusCo2(device) {
+    return getDeviceCard(device).getElementsByClassName('co2-value')[0];
 }
-function getDeviceStatusSw2(device) {
-    return getDeviceCard(device).getElementsByClassName('sw2-value')[0];
+function getDeviceStatusTvco(device) {
+    return getDeviceCard(device).getElementsByClassName('tvco-value')[0];
 }
 
 function getDeviceNotificationButton(device) {

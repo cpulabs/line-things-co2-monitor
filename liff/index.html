@@ -8,7 +8,7 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css?id=20190111_1547196772">
-  <title>LINE Things development board</title>
+  <title>LINE Things - CO2 Monitor</title>
 </head>
 
 <body>
@@ -54,17 +54,31 @@
           <nav class="row">
             <div class="nav nav-tabs col" role="tablist">
               <a class="nav-item nav-link small active" id="nav-notify-tab" data-toggle="tab" href="#nav-notify" role="tab" aria-controls="nav-notify" aria-selected="true">Notify</a>
-              <a class="nav-item nav-link small" id="nav-write-tab" data-toggle="tab" href="#nav-write" role="tab" aria-controls="nav-write" aria-selected="true">Write</a>
-              <a class="nav-item nav-link small" id="nav-advert-tab" data-toggle="tab" href="#nav-advert" role="tab" aria-controls="nav-advert" aria-selected="true">Write advertising packet</a>
-            </div>
+              </div>
           </nav>
 
 
 
           <div class="tab-content row my-2">
-
-
             <div class="tab-pane fade col show active" id="nav-notify" role="tabpanel" aria-labelledby="nav-notify-tab">
+
+              <div class="d-flex align-items-center justify-content-between text-center mb-3">
+                <div class="w-25">
+                  <i class="fas toggle-on">CO2</i>
+                </div>
+                <div class="co2-value flex-grow-1 lead">
+                  ---
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between text-center mb-3">
+                <div class="w-25">
+                  <i class="fas toggle-on">CO2</i>
+                </div>
+                <div class="tvco-value flex-grow-1 lead">
+                  ---
+                </div>
+              </div>
 
               <div class="d-flex align-items-center justify-content-between text-center mb-3">
                 <div class="w-25">
@@ -75,54 +89,6 @@
                 </div>
               </div>
 
-              <div class="d-flex align-items-center justify-content-between text-center mb-3">
-                <div class="w-25 lead">
-                  X
-                </div>
-                <div class="temperature-value flex-grow-1 lead">
-                  <div class="progress">
-                    <div class="progress-bar bg-success progress-bar-x" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="-32768" aria-valuemax="32767">0.0</div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-3">
-                <div class="w-25 lead">
-                  Y
-                </div>
-                <div class="temperature-value flex-grow-1 lead">
-                  <div class="progress">
-                    <div class="progress-bar bg-info progress-bar-y" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="-32768" aria-valuemax="32767">0.0</div>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-3">
-                <div class="w-25 lead">
-                  Z
-                </div>
-                <div class="temperature-value flex-grow-1 lead">
-                  <div class="progress">
-                    <div class="progress-bar bg-warning progress-bar-z" role="progressbar" style="width: 50%;" aria-valuenow="0" aria-valuemin="-32768" aria-valuemax="32767">0.0</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="d-flex align-items-center justify-content-between text-center mb-3">
-                <div class="w-25">
-                  <i class="fas toggle-on">SW1</i>
-                </div>
-                <div class="sw1-value flex-grow-1 lead">
-                  ---
-                </div>
-              </div>
-
-              <div class="d-flex align-items-center justify-content-between text-center mb-3">
-                <div class="w-25">
-                  <i class="fas toggle-on">SW2</i>
-                </div>
-                <div class="sw2-value flex-grow-1 lead">
-                  ---
-                </div>
-              </div>
 
               <div class="row justify-content-center">
                 <div class="col text-center">
@@ -130,193 +96,6 @@
                 </div>
               </div>
 
-            </div>
-
-            <div class="tab-pane fade col" id="nav-write" role="tabpanel" aria-labelledby="nav-write-tab">
-
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  LED2
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="led0" action="">
-                      <input type="checkbox" class="led0_value flex-grow-1 lead" name="led0" id="led0-id" autocomplete="on">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  LED3
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="led1" action="">
-                      <input type="checkbox" class="led1_value flex-grow-1 lead" name="led1" id="led1-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  LED4
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="led2" action="">
-                      <input type="checkbox" class="led2_value flex-grow-1 lead" name="led2" id="led2-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  LED5
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="led3" action="">
-                      <input type="checkbox" class="led3_value flex-grow-1 lead" name="led1" id="led3-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  Buzzer
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="buzzer" action="">
-                      <input type="checkbox" class="buzzer_value flex-grow-1 lead" name="buzzer" id="buzzer-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO2
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io2" action="">
-                      <input type="checkbox" class="io2_value flex-grow-1 lead" name="io2" id="io2-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO3
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io3" action="">
-                      <input type="checkbox" class="io3_value flex-grow-1 lead" name="io3" id="io3-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO4
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io4" action="">
-                      <input type="checkbox" class="io4_value flex-grow-1 lead" name="io4" id="io4-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO5
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io5" action="">
-                      <input type="checkbox" class="io5_value flex-grow-1 lead" name="io5" id="io5-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO12
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io12" action="">
-                      <input type="checkbox" class="io12_value flex-grow-1 lead" name="io12" id="io12-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO13
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io13" action="">
-                      <input type="checkbox" class="io13_value flex-grow-1 lead" name="io13" id="io13-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO14
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io14" action="">
-                      <input type="checkbox" class="io14_value flex-grow-1 lead" name="io14" id="io14-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO15
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io15" action="">
-                      <input type="checkbox" class="io15_value flex-grow-1 lead" name="io15" id="io15-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-between text-center mb-1">
-                <div class="w-25">
-                  IO16
-                </div>
-                <div class="flex-grow-1 lead">
-                  <p>
-                    <form name="io16" action="">
-                      <input type="checkbox" class="io16_value flex-grow-1 lead" name="io16" id="io16-id" autocomplete="off">
-                    </form>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade col" id="nav-advert" role="tabpanel" aria-labelledby="nav-advert-tab">
-              <div class="row justify-content-center">
-                <div class="col text-center">
-                  <p>
-                    <label for="uuid">Advertising UUID</label>
-                    <input type="" class="form-control uuid_text" id="uuidtext" placeholder="UUID">
-                    <small class="text-muted">Advertisingで使うUUIDを変更します。間違ったUUIDを書き込んでしまうとLINE Appから見れなくなってしまうことがあるので注意してください。
-                    書き込みしたあとにデバイスのリセットボタンを押して再起動することで反映されます。LIFFアプリも一度閉じてから再度開いてください。初期化したい場合はSW1を押しながらリセットスイッチを押すことでデフォルトのUUIDに戻ります。</small>
-                  </p>
-                  <p>
-                    <button type="button" class="setuuid btn btn-secondary"><i class="fas fa-sync-alt"></i> Write UUID</button>
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
 

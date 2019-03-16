@@ -101,8 +101,8 @@ void loop() {
 
         display.print(" ppm\nTVOC: ");
         //Serial.print(" ppm, TVOC: ");
-        float TVOC = ccs.getTVOC();
-        display.print(TVOC);
+        float tvco = ccs.getTVOC();
+        display.print(tvco);
         //Serial.print(TVOC);
 
         //Serial.print(" ppb   Temp:");
@@ -111,7 +111,15 @@ void loop() {
         display.println(temp);
         display.display();
 
-        co2Characteristic.notify16((uint16_t) eCO2);
+        int16_t tx_frame[3] = {
+          (int16_t) eCO2,
+          (int16_t) tvco,
+          (int16_t) temp * 100
+        };
+
+
+        //co2Characteristic.notify16((uint16_t) eCO2);
+        co2Characteristic.notify((uint8_t*)tx_frame, sizeof(tx_frame));
 
         refreshSensorValue = false;
         Serial.println(eCO2);
@@ -139,7 +147,7 @@ void setupServices(void) {
   co2Characteristic = BLECharacteristic(airCo2CharacteristicUUID);
   co2Characteristic.setProperties(CHR_PROPS_READ | CHR_PROPS_NOTIFY);
   co2Characteristic.setPermission(SECMODE_ENC_NO_MITM, SECMODE_ENC_NO_MITM);
-  co2Characteristic.setFixedLen(2);
+  co2Characteristic.setFixedLen(6);
   co2Characteristic.begin();
 
   // Setup PSDI Service
