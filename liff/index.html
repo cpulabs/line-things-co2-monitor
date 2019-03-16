@@ -54,7 +54,8 @@
           <nav class="row">
             <div class="nav nav-tabs col" role="tablist">
               <a class="nav-item nav-link small active" id="nav-notify-tab" data-toggle="tab" href="#nav-notify" role="tab" aria-controls="nav-notify" aria-selected="true">Notify</a>
-              </div>
+              <a class="nav-item nav-link small" id="nav-advert-tab" data-toggle="tab" href="#nav-advert" role="tab" aria-controls="nav-advert" aria-selected="true">Write advertising packet</a>
+            </div>
           </nav>
 
 
@@ -73,7 +74,7 @@
 
               <div class="d-flex align-items-center justify-content-between text-center mb-3">
                 <div class="w-25">
-                  <i class="fas toggle-on">CO2</i>
+                  <i class="fas toggle-on">TVCO</i>
                 </div>
                 <div class="tvco-value flex-grow-1 lead">
                   ---
@@ -98,6 +99,23 @@
 
             </div>
           </div>
+
+
+          <div class="tab-pane fade col" id="nav-advert" role="tabpanel" aria-labelledby="nav-advert-tab">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <p>
+                    <label for="uuid">Advertising UUID</label>
+                    <input type="" class="form-control uuid_text" id="uuidtext" placeholder="UUID">
+                    <small class="text-muted">Advertisingで使うUUIDを変更します。間違ったUUIDを書き込んでしまうとLINE Appから見れなくなってしまうことがあるので注意してください。
+                    書き込みしたあとにデバイスのリセットボタンを押して再起動することで反映されます。LIFFアプリも一度閉じてから再度開いてください。初期化したい場合はSW1を押しながらリセットスイッチを押すことでデフォルトのUUIDに戻ります。</small>
+                  </p>
+                  <p>
+                    <button type="button" class="setuuid btn btn-secondary"><i class="fas fa-sync-alt"></i> Write UUID</button>
+                  </p>
+                </div>
+              </div>
+            </div>
 
         </div>
       </div>

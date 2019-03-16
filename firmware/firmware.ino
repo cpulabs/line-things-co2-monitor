@@ -94,20 +94,14 @@ void loop() {
       display.setCursor(0,0);
       if(!ccs.readData()){
         display.print("eCO2: ");
-        //Serial.print("eCO2: ");
         float eCO2 = ccs.geteCO2();
         display.print(eCO2);
-        //Serial.print(eCO2);
 
         display.print(" ppm\nTVOC: ");
-        //Serial.print(" ppm, TVOC: ");
         float tvco = ccs.getTVOC();
         display.print(tvco);
-        //Serial.print(TVOC);
 
-        //Serial.print(" ppb   Temp:");
         display.print(" ppb\nTemp: ");
-        //Serial.println(temp);
         display.println(temp);
         display.display();
 
@@ -116,7 +110,6 @@ void loop() {
           (int16_t) tvco,
           (int16_t) temp * 100
         };
-
 
         //co2Characteristic.notify16((uint16_t) eCO2);
         co2Characteristic.notify((uint8_t*)tx_frame, sizeof(tx_frame));
