@@ -10,14 +10,14 @@
 #define DEVICE_NAME "LINE Things CO2 Monitor"
 
 // User service UUID: Change this to your generated service UUID
-#define USER_SERVICE_UUID ""
+#define USER_SERVICE_UUID "1cdb9e37-2b72-4c43-b5ff-955e519bdcf1"
 
 #define AIR_SERVICE_UUID "7ebad564-1669-4bd7-abc8-1c9c4d2dcc26"
 #define AIR_CO2_CHARACTERISTIC_UUID "a4f521de-ea92-4269-9e4f-16a8cac25178"
 
 // PSDI Service UUID: Fixed value for Developer Trial
-#define PSDI_SERVICE_UUID ""
-#define PSDI_CHARACTERISTIC_UUID ""
+#define PSDI_SERVICE_UUID "e625601e-9e55-4597-a598-76018a0d293d"
+#define PSDI_CHARACTERISTIC_UUID "26e2b12b-85f0-4f3f-9fdd-91d114270e6e"
 
 
 Adafruit_CCS811 ccs;
