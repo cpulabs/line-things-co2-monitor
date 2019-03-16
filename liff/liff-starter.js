@@ -162,7 +162,7 @@ function initializeCardForDevice(device) {
         tab['aria-controls'] = nav.id;
         nav['aria-labelledby'] = tab.id;
     })
-
+    
     // Remove existing same id card
     const oldCardElement = getDeviceCard(device);
     if (oldCardElement && oldCardElement.parentNode) {
