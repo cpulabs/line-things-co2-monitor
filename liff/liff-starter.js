@@ -151,8 +151,7 @@ function initializeCardForDevice(device) {
     });
 
     // Tabs
-    /*
-    ['notify', 'write', 'advert'].map(key => {
+    ['notify', 'advert'].map(key => {
         const tab = template.querySelector(`#nav-${key}-tab`);
         const nav = template.querySelector(`#nav-${key}`);
 
@@ -163,7 +162,6 @@ function initializeCardForDevice(device) {
         tab['aria-controls'] = nav.id;
         nav['aria-labelledby'] = tab.id;
     })
-    */
 
     // Remove existing same id card
     const oldCardElement = getDeviceCard(device);
