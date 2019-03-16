@@ -112,6 +112,7 @@ void loop() {
         display.display();
 
         co2Characteristic.notify16((uint16_t) eCO2);
+
         refreshSensorValue = false;
         Serial.println(eCO2);
       }
